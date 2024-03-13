@@ -1,0 +1,82 @@
+<section id="addNewExpense" class="container_addExpense_fullH">
+  <div *ngIf="!isNewExpenseGroupActive" class="container_btn">
+    <button
+      class="btn_add_round"
+      alt="Añadir Grupo de gasto"
+      (click)="addExpenseGroup()"
+    >
+      <span class="btn_plus_add_big">+</span>
+    </button>
+  </div>
+
+  <ng-container
+    *ngIf="isNewExpenseGroupActive"
+    style="display: flex; flex-direction: column; padding-bottom: 100px"
+  >
+    <h1>{{ tittlePlusSection }}</h1>
+
+    <form novalidate [formGroup]="expenseGroupForm">
+      <section style="display: flex; flex-direction: column; gap: 20px">
+        <div>
+          <label for="nombre">Nombre del grupo:</label>
+          <input type="text" id="nombre" formControlName="description" />
+        </div>
+
+        <div>
+          <label for="friends">Amigos:</label>
+          <input type="text" id="friends" formControlName="friends" />
+        </div>
+
+        <section style="display: flex; gap: 20px; flex-direction: row">
+          <button
+            class=""
+            alt="Guardar Grupo de gasto"
+            (click)="saveExpenseGroup()"
+          >
+            Guardar
+          </button>
+
+          <button
+            class=""
+            alt="Cancelar el Guardar Grupo de gasto"
+            (click)="cleanListView()"
+          >
+            Cancelar
+          </button>
+        </section>
+      </section>
+    </form>
+  </ng-container>
+</section>
+
+<section id="expenseList" class="container_expenseList_fullH">
+  <div
+    style="margin-left: 700px; margin-top: 150px"
+    *ngIf="expenseGroupList.length === 0"
+  >
+    Aun no perteneces a ningun grupo
+  </div>
+
+  <div class="container_group">
+    <section
+      *ngFor="let expenseGroup of expenseGroupList"
+      style="margin-bottom: 10px"
+    >
+      <div class="icon" [routerLink]="['detail', expenseGroup.id]">
+        <img width="40" alt="Gestión de gastos" src="assets/test2.png" />
+      </div>
+      <div class="container_expense-group" style="margin-top: -20px">
+        <h2 style="margin-top: -1px" [routerLink]="['detail', expenseGroup.id]">
+          <a>{{ expenseGroup.description }}</a>
+        </h2>
+
+        <h3 style="margin-top: -1px" (click)="editGroup(expenseGroup)">
+          (<span *ngFor="let user of expenseGroup.userList; let idx = index">{{
+            idx < expenseGroup.userList.length - 1 ? user + ", " : user
+          }}</span
+          >)
+        </h3>
+      </div>
+    </section>
+  </div>
+</section>

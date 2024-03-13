@@ -1,9 +1,9 @@
 export class ExpenseGroup {
     constructor(
         public id: number,
-        public owner: string,
+        public owner: number,
         public description: string,
-        public expenseList: number[],
+        public userList: string[],
         public createDate: string,
     ) { }
 }

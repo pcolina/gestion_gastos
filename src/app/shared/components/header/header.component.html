@@ -1,0 +1,16 @@
+<div class="my-container-fluid toolbar" role="banner">
+  <span class="tittle_header">{{ expense_handler }}</span>
+  <div>
+    <ul style="list-style-type: none">
+      <li *ngFor="let item of menu">
+        <a
+          [routerLink]="['cost-sharing-groups']"
+          routerLinkActive="active"
+          class="link-like link-like:hoover"
+          >{{ item }}</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="spacer"></div>
+</div>

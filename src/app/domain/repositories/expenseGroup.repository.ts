@@ -1,9 +1,11 @@
 import { Observable } from 'rxjs';
 
-import { Expense } from '../models/expense.model';
+import { ExpenseGroup } from '../models/expenseGroup.model';
 
 export abstract class ExpenseGroupRepository {
-    abstract getExpenses(): Observable<Expense[]>;
-    abstract addExpense(expense: Expense): Observable<Expense>;
-    abstract deleteExpenses(id: number): Observable<void>;
+    abstract getExpenseGroups(idUser: number): Observable<ExpenseGroup[]>;
+    abstract getExpenseGroupById(idExpenseGroup: number): Observable<ExpenseGroup>;
+    abstract addExpenseGroup(expenseGroup: ExpenseGroup): Observable<boolean>;
+    abstract updateExpenseGroup(expenseGroup: ExpenseGroup): Observable<boolean>;
+    // abstract deleteExpenseGroup(idExpenseGroup: number): Observable<boolean>;
 }

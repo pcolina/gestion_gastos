@@ -1,0 +1,29 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+}
+
+.card {
+  flex: 1 0 calc(25% - 10px); /* 25% width with some spacing */
+  margin: 5px; /* Optional spacing between cards */
+}
+
+.tittle-group-big {
+  font-weight: bold;
+  font-size: 38px;
+  display: flex;
+  margin-left: 50px;
+}
+.balance {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.text-green {
+  color: green;
+}
+.text-red {
+  color: red;
+}

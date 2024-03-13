@@ -1,0 +1,139 @@
+<section id="addNewExpense" class="container_addExpense_fullH">
+  <div *ngIf="!isNewExpenseActive" class="container_btn title_justify">
+    <span class="tittle-group-big">{{ myExpenseGroup.description }}</span>
+    <button
+      class="btn_add_round"
+      alt="Añadir Grupo de gasto"
+      (click)="addExpense()"
+    >
+      <span class="btn_plus_add_big" style="padding-top: -20px !important"
+        >+</span
+      >
+    </button>
+  </div>
+
+  <ng-container *ngIf="isNewExpenseActive">
+    <h1>A continuacion añada un gasto :</h1>
+
+    <form
+      novalidate
+      [formGroup]="expenseForm"
+      style="display: flex; flex-direction: column; gap: 20px"
+    >
+      <ng-container>
+        <div>
+          <label for="nombre">Cantidad:</label>
+          <input
+            type="text"
+            id="nombre"
+            formControlName="amount"
+            style="margin-left: 15px"
+          />
+        </div>
+
+        <div>
+          <label for="friends">Pagador</label>
+
+          <select
+            id="myFormControl"
+            formControlName="payer"
+            class="form-control"
+            style="margin-left: 15px"
+          >
+            <option *ngFor="let user of myExpenseGroup.userList" [value]="user">
+              {{ user }}
+            </option>
+
+            <!-- Agrega más opciones según tus necesidades -->
+          </select>
+        </div>
+
+        <div>
+          <label for="friends">Descripción</label>
+          <input
+            type="text"
+            id="friends"
+            formControlName="description"
+            style="margin-left: 15px"
+          />
+        </div>
+
+        <div>
+          <label for="nombre">Fecha</label>
+          <input
+            type="date"
+            id="nombre"
+            formControlName="paymentDate"
+            style="margin-left: 15px"
+          />
+        </div>
+      </ng-container>
+
+      <section style="display: flex; gap: 20px; flex-direction: row">
+        <button class="" alt="Guardar Grupo de gasto" (click)="saveExpense()">
+          Guardar
+        </button>
+
+        <button
+          class=""
+          alt="Guardar Grupo de gasto"
+          (click)="cancelSaveExpense()"
+        >
+          Cancelar
+        </button>
+      </section>
+    </form>
+  </ng-container>
+</section>
+
+<section
+  *ngIf="expenseList.length < 1"
+  style="margin-left: 700px; margin-top: 150px"
+>
+  <span>No hay Gastos registrados aún</span>
+</section>
+
+<div class="card-container" *ngIf="expenseList.length > 0">
+  <div *ngFor="let expense of expenseList">
+    <app-card [expense]="expense" class="carc"> </app-card>
+  </div>
+</div>
+
+<section id="addNewExpense" class="container_addExpense_fullH balance">
+  <div
+    *ngIf="!isNewExpenseActive && expenseList.length > 0"
+    class="container_btn title_justify"
+  >
+    <button
+      class="btn_add_round"
+      alt="Calcular balance"
+      (click)="calculateBalance()"
+    >
+      <span class="btn_plus_add_big">€</span>
+    </button>
+  </div>
+</section>
+
+<section id="debt" *ngIf="showBalance" style="margin: 25px">
+  Balance: <br /><br />
+  <section *ngFor="let text of debtList2.reverse()">
+    {{ text[0] }} :
+    <span *ngIf="text[1] === '0.00'"> {{ text[1] | number }} €</span>
+    <span *ngIf="text[2] === '+'" class="text-green"> {{ text[1] }}€ </span>
+
+    <span *ngIf="text[2] === '-' && text[1] < 0.0" class="text-red">
+      -{{ text[1] }}€
+    </span>
+
+    <br />
+  </section>
+</section>
+<section
+  id="Deudas"
+  *ngIf="showBalance && debtTexts.length > 0"
+  style="margin: 25px"
+>
+  Deudas: <br /><br />
+
+  <span *ngFor="let text of debtTexts"> {{ text }}<br /></span>
+</section>

@@ -10,10 +10,10 @@ import { UserService } from './../services/user.service';
     providedIn: 'root',
 })
 export class UserUsecase implements UserRepository {
-    constructor(private UserUsecase: UserService) { }
+    constructor(private userService: UserService) { }
 
     getUser(idUser: number): Observable<User> {
-        return this.UserUsecase.getUser(idUser)
+        return this.userService.getUser(idUser)
 
     }
 }
